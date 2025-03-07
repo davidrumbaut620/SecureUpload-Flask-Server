@@ -1,6 +1,8 @@
 
 # **SecureUpload Flask Server 🚀🔒**
 
+![Logo de la aplicación](images/logo.png)
+
 ## **Descripción General**  
 **SecureUpload Flask Server** es un servidor ligero y seguro para la carga y gestión de archivos, especialmente imágenes, desarrollado con Flask. Diseñado para ser **rápido, seguro y fácil de usar**, este servidor proporciona un entorno confiable para manejar archivos sin comprometer la seguridad de las credenciales.
 
