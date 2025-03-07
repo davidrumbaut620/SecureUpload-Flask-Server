@@ -59,6 +59,23 @@ python app.py
 ```
 http://127.0.0.1:8000
 ```
+## 🚀 Despliegue en Railway  
+
+Puedes desplegar esta aplicación **gratis** en [Railway](https://railway.com?referralCode=d6fSsy), una plataforma en la nube que permite ejecutar servidores Flask de manera sencilla y te regala $5 al crear tu cuenta gratuita.  
+
+![Railway Logo](https://raw.githubusercontent.com/davidrumbaut620/SecureUpload-Flask-Server/refs/heads/main/Railway_web.png)  
+
+
+### 📌 Pasos para desplegar en Railway:  
+1. **Hacer un fork** de este repositorio en tu cuenta de GitHub.  
+2. **Crear una cuenta en Railway** usando este enlace 👉 [Railway](https://railway.com?referralCode=d6fSsy).  
+3. **Conectar tu repositorio de GitHub** con Railway.  
+4. **Configurar las variables de entorno** (`ADMIN_USERNAME`, `ADMIN_PASSWORD` y `SECRET_KEY`).  
+5. **Deploy automático** con cada actualización en tu repositorio.  
+
+🔹 **Railway** es una excelente opción para alojar tu servidor Flask sin preocuparte por configuraciones complicadas. 🚀🔥  
+
+[➡️ **Haz fork ahora y despliega tu aplicación en minutos!**](https://railway.com?referralCode=d6fSsy)
 
 ---
 
