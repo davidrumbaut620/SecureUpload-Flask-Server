@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <meta name="description" content="SecureUpload Flask Server">
+    <meta name="keywords" content="SecureUpload, Flask, Server, Upload, Download">
+    <meta name="author" content="David RT">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureUpload Flask Server</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/back_animation.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="min-h-screen">
+    {% if current_user.is_authenticated %}
+    
+    <!-- Menú móvil -->
+    <div class="md:hidden">
+        <button id="menuButton" class="fixed bottom-0 left-0 z-50 menu-button">
+            <span class="menu-icon"></span>
+        </button>
+        
+        <div id="mobileMenu" class="fixed inset-0 menu-content transform translate-x-full transition-transform duration-300 ease-in-out z-40">
+            <div class="flex flex-col h-full p-6">
+                <nav class="flex-1 flex flex-col items-center justify-center">
+                    <a href="{{ url_for('dashboard') }}" class="menu-item w-full text-center text-xl mb-4">
+                        <i class="fas fa-home mr-3"></i>Home
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="menu-item w-full text-center text-xl">
+                        <i class="fas fa-sign-out-alt mr-3"></i>Log out
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="animation" style="z-index: -1000;">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+     </div>
+
+
+    {% endif %}
+
+    
+
+    <div class="stars"></div>
+    <div class="container mx-auto px-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuButton = document.getElementById('menuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                menuButton.classList.toggle('active');
+                if (menuButton.classList.contains('active')) {
+                    mobileMenu.classList.remove('translate-x-full');
+                    mobileMenu.classList.add('translate-x-0');
+                } else {
+                    mobileMenu.classList.remove('translate-x-0');
+                    mobileMenu.classList.add('translate-x-full');
+                }
+            });
+
+            // Cerrar menú al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target) && menuButton.classList.contains('active')) {
+                    menuButton.classList.remove('active');
+                    mobileMenu.classList.remove('translate-x-0');
+                    mobileMenu.classList.add('translate-x-full');
+                }
+            });
+        }
+    });
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
