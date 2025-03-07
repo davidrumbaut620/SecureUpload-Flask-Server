@@ -1,7 +1,7 @@
 
 # **SecureUpload Flask Server 🚀🔒**
 
-![Logo de la aplicación](blob/main/static/images/logo.png)
+![Login Page](https://raw.githubusercontent.com/davidrumbaut620/SecureUpload-Flask-Server/refs/heads/main/shot_transparent.png)
 
 ## **Descripción General**  
 **SecureUpload Flask Server** es un servidor ligero y seguro para la carga y gestión de archivos, especialmente imágenes, desarrollado con Flask. Diseñado para ser **rápido, seguro y fácil de usar**, este servidor proporciona un entorno confiable para manejar archivos sin comprometer la seguridad de las credenciales.
@@ -25,6 +25,8 @@ SECRET_KEY=tu_clave
 > 💡 **Importante:** Nunca compartas tu `SECRET_KEY` ni tus credenciales de administrador públicamente.
 
 ---
+
+![MockUP](https://raw.githubusercontent.com/davidrumbaut620/SecureUpload-Flask-Server/refs/heads/main/shot2_transparent.png)
 
 ## **📂 Funcionalidades Principales**  
 🔥 **Carga Segura de Archivos**: Permite subir imágenes y otros archivos con autenticación.  
