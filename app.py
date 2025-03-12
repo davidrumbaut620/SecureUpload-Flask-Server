@@ -41,7 +41,7 @@ app.config['SECRET_KEY'] = secret_key
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)  # Session duration
-app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'pdf', 'doc', 'docx', 'txt', 'zip', 'rar', 'mp3', 'mp4', 'xls', 'xlsx', 'ppt', 'pptx', 'csv'}
 
 # Ensure directories exist
 for directory in [app.config['UPLOAD_FOLDER'], 'static/images']:
@@ -72,21 +72,14 @@ def load_user(user_id):
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-def get_next_image_number():
+def generate_unique_filename(original_filename):
     try:
-        files = os.listdir(app.config['UPLOAD_FOLDER'])
-        max_num = 0
-        for file in files:
-            if file.startswith('img'):
-                try:
-                    num = int(file.split('.')[0][3:])
-                    max_num = max(max_num, num)
-                except (ValueError, IndexError):
-                    continue
-        return max_num + 1
+        # Mantener el nombre original pero añadir un UUID al principio
+        name, ext = os.path.splitext(original_filename)
+        return f"{unique_id}-{secure_filename(name)}{ext}"
     except Exception as e:
-        logger.error(f"Error getting next image number: {str(e)}")
-        return 1
+        logger.error(f"Error generating unique filename: {str(e)}")
+        return secure_filename(original_filename)
 
 @app.route('/')
 def index():
@@ -184,10 +177,8 @@ def upload_file():
         return jsonify({'error': 'Tipo de archivo no permitido'}), 400
     
     try:
-        # Generar nuevo nombre secuencial
-        ext = file.filename.rsplit('.', 1)[1].lower()
-        new_number = get_next_image_number()
-        filename = f'img{new_number}.{ext}'
+        # Generate unique filename
+        filename = generate_unique_filename(file.filename)
         
         # Guardar archivo
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -236,7 +227,7 @@ def uploaded_file(filename):
             os.path.abspath(app.config['UPLOAD_FOLDER']), 
             filename,
             as_attachment=False,
-            mimetype='image/*'
+            mimetype=None
         )
     except Exception as e:
         logger.error(f"Error serving file {filename}: {str(e)}")
